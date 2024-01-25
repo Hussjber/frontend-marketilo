@@ -17,7 +17,6 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useLocation } from "react-router-dom";
-import image from "./bg.png"
 
 const theme = createTheme();
 
@@ -141,7 +140,7 @@ function AuthPage() {
           md={7}
           sx={{
             backgroundImage:
-              {image},
+              "url(https://source.unsplash.com/random?wallpapers)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
