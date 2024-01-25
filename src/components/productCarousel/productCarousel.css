@@ -1,0 +1,14 @@
+.carousel-item {
+  padding: 16px;
+  text-align: center;
+}
+
+.carousel-image {
+  width: 100%; /* Make image take full width of the container */
+  height: 400px; /* Fixed height */
+  object-fit: cover; /* Ensures image covers the area */
+}
+
+.product-info {
+  margin-top: 8px;
+}
