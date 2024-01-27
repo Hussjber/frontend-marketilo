@@ -110,7 +110,8 @@ function Nav() {
   };
 
   return (
-      <Box className="container mx-auto flex items-center justify-between h-full">
+    <nav className="py-3 " style={{ backgroundColor: "rgb(45, 45, 45)" }}>
+      <Box className="container mx-auto flex items-center justify-between">
         <Box onClick={() => navigate("/")} className="logo-text">
           <h3>Marketilo</h3>
         </Box>
@@ -218,6 +219,7 @@ function Nav() {
           </Popover>
         </Box>
       </Box>
+    </nav>
   );
 }
 
