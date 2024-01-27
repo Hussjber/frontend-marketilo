@@ -110,7 +110,8 @@ function Nav() {
   };
 
   return (
-    <Box className=" sm md lg xl 2xl bg-gray-700">
+    <Box className="container mx-auto flex "
+    style={{ backgroundColor: "rgb(45, 45, 45)" }}>
       <Box className="container mx-auto flex items-center justify-between h-full">
         <Box onClick={() => navigate("/")} className="logo-text">
           <h3>Marketilo</h3>
