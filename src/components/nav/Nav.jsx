@@ -110,7 +110,7 @@ function Nav() {
   };
 
   return (
-    <Box className="navbar-container">
+    <Box className=" sm md lg xl 2xl bg-gray-700">
       <Box className="container mx-auto flex items-center justify-between h-full">
         <Box onClick={() => navigate("/")} className="logo-text">
           <h3>Marketilo</h3>
