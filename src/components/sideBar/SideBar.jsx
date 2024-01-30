@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { SidebarContext } from "../../contexts/SidebarContext";
 import { IoMdArrowForward } from "react-icons/io";
 import { CartContext } from "../../contexts/CartContext";
@@ -10,7 +10,19 @@ import { useNavigate } from "react-router-dom";
 function SideBar() {
   const { isOpen, handelClose } = useContext(SidebarContext);
   const { cart, clearCart, itemAmount, totalPrice } = useContext(CartContext);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    if (cart.length === 0) {
+      // Display a message when the cart is empty
+      setError("Cannot place an order with an empty cart.");
+    } else {
+      // Navigate to the order page
+      navigate("/order");
+    }
+  };
+
   return (
     <div
       className={`${
@@ -43,7 +55,6 @@ function SideBar() {
               {totalPrice}₪
             </div>
           )}
-
           {/* CLEAR CART */}
           <div
             onClick={clearCart}
@@ -56,10 +67,11 @@ function SideBar() {
       <Button
         variant="outlined"
         className="checkout-button"
-        onClick={() => navigate("/order")}
+        onClick={handleCheckout}
       >
         Go to checkout
       </Button>
+      <div>{error && <span className="text-red-500">{error}</span>}</div>
     </div>
   );
 }

@@ -7,12 +7,14 @@ import Box from "@mui/material/Box";
 import "./ProductDetails.css";
 import axios from "axios";
 import { CartContext } from "../../contexts/CartContext";
+import { SidebarContext } from "../../contexts/SidebarContext";
 
 function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const { addToCart } = useContext(CartContext);
+  const { isOpen, setIsOpen } = useContext(SidebarContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [height, setHeight] = useState("");
@@ -62,11 +64,26 @@ function ProductDetails() {
     );
     setRecommendedSize(sizeOrder[finalIndex]);
   };
+  const handleAddToCart = () => {
+    const productToAdd = {
+      _id: product._id,
+      name: product.name,
+      image: product.image,
+      title: product.title,
+      price: product.price,
+    };
+    addToCart(productToAdd);
+    if (!isOpen) {
+      setIsOpen(true);
+    }
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`https://marketilo.onrender.com/product/${id}`);
+        const response = await axios.get(
+          `https://marketilo.onrender.com/product/${id}`
+        );
         setProduct(response.data);
         setLoading(false);
       } catch (error) {
@@ -129,15 +146,7 @@ function ProductDetails() {
                 backgroundColor: "#9c27b0",
                 color: "white",
               }}
-              onClick={() =>
-                addToCart({
-                  _id: product._id,
-                  name: product.name,
-                  image: product.image,
-                  title: product.title,
-                  price: product.price,
-                })
-              }
+              onClick={handleAddToCart}
             >
               Add to cart
             </Button>
