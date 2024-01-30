@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     () => localStorage.getItem("token") || null
   );
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Default to false
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
   const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
@@ -66,8 +66,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
-    setIsLoggedIn(false); // Manually set isLoggedIn to false on logout
-    setUserRole(""); // Clear the userRole on logout
+    setIsLoggedIn(false); 
+    setUserRole(""); 
   };
 
   const getToken = useCallback(() => {

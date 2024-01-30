@@ -80,7 +80,7 @@ function AuthPage() {
         setIsLoading(false);
         console.log(res);
 
-        if (res.status === 201 && res.statusText === "Created") {
+        if (res.status === 201 && res.data.userId) {
           // Registration successful, show a message and redirect to login
           setError("Registration successful! Please login.");
           await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -106,10 +106,13 @@ function AuthPage() {
       try {
         setIsLoading(true);
         setError(null);
-        const res = await axios.post("https://marketilo.onrender.com/marketilo/login", {
-          email,
-          password,
-        });
+        const res = await axios.post(
+          "https://marketilo.onrender.com/marketilo/login",
+          {
+            email,
+            password,
+          }
+        );
 
         // Store the token in local storage
         login(res.data.token, res.data.role);

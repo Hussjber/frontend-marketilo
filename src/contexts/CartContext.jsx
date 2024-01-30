@@ -10,29 +10,18 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
 
-  useEffect(() => {
     if (cart) {
-      const amount = cart.reduce((acc, curr) => {
-        return acc + curr.amount;
-      }, 0);
+      const amount = cart.reduce((acc, curr) => acc + curr.amount, 0);
       setItemAmount(amount);
     }
-  }, [cart]);
 
-  useEffect(() => {
-    // Calculate total price whenever the cart changes
-    const total = cart.reduce((acc, item) => {
-      return acc + item.price * item.amount;
-    }, 0);
-
+    const total = cart.reduce((acc, item) => acc + item.price * item.amount, 0);
     setTotalPrice(total);
   }, [cart]);
 
   const addToCart = (product) => {
     const { _id, image, name, price } = product;
-    console.log(product);
     const existingItemIndex = cart.findIndex((item) => item._id === _id);
 
     if (existingItemIndex !== -1) {

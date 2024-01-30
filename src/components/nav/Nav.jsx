@@ -6,7 +6,6 @@ import {
   Popover,
   Button,
   Divider,
-  Paper,
 } from "@mui/material";
 import { ShoppingBagOutlined, PersonOutline } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -65,11 +64,10 @@ function Nav() {
       return;
     }
 
-    // Navigate to register if not logged in
     if (!isLoggedIn) {
       navigate("/register");
     } else {
-      setAnchorEl(event.currentTarget); // Open the popover if logged in
+      setAnchorEl(event.currentTarget);
     }
   };
 
@@ -96,12 +94,11 @@ function Nav() {
   };
 
   const popoverStyle = {
-    mt: 0.3, // Adds a small top margin for the popover
+    mt: 0.3,
     "& .MuiPaper-root": {
-      // Styles the paper component inside the popover
-      minWidth: "200px", // Minimum width of the popover
-      borderRadius: "10px", // Rounded corners
-      overflow: "hidden", // Hides overflow to respect border radius
+      minWidth: "200px",
+      borderRadius: "10px",
+      overflow: "hidden",
     },
   };
   const buttonStyle = {
@@ -115,12 +112,12 @@ function Nav() {
         <Box onClick={() => navigate("/")} className="logo-text">
           <h3>Marketilo</h3>
         </Box>
-        <div className="relative">
+        <div className="relative" style={{ width: "70%" }}>
           <form
             onSubmit={(e) => e.preventDefault()}
             className="flex items-center bg-white rounded-md"
             style={{
-              width: "750px",
+              width: "100%",
               borderRadius: "19px/50%",
               border: "transparent",
             }}

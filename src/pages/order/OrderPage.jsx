@@ -1,25 +1,27 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import { CartContext } from "../../contexts/CartContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useAuth } from "../../contexts/AuthContext";
 
 function OrderPage() {
   const { storedCart, clearCart } = useContext(CartContext);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderId, setOrderId] = useState(null);
-  // console.log("cart:", storedCart);
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   const saveOrder = async () => {
     try {
-      const token = localStorage.getItem("token"); // Or however you're storing the token
+      const token = localStorage.getItem("token");
 
       // Prepare the order items from the cart
       const orderItems = storedCart.map((item) => ({
-        quantity: item.amount, // Assuming 'amount' is the quantity in the cart
+        quantity: item.amount,
         price: item.price,
-        product: item._id, // Assuming this is the product ID
+        product: item._id,
       }));
 
       // Prepare the order data
@@ -45,6 +47,14 @@ function OrderPage() {
     } catch (error) {
       console.error("Error saving order:", error);
       toast.error("There was an issue with your order.");
+    }
+  };
+
+  const handlePlaceOrder = () => {
+    if (isLoggedIn) {
+      saveOrder();
+    } else {
+      navigate("/register");
     }
   };
 
@@ -104,14 +114,26 @@ function OrderPage() {
           </div>
         </div>
       ))}
-      <div className="flex justify-center">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-          onClick={saveOrder}
-        >
-          Place Order
-        </button>
-      </div>
+      {isLoggedIn ? (
+        <div className="flex justify-center">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+            onClick={handlePlaceOrder}
+          >
+            Place Order
+          </button>
+        </div>
+      ) : (
+        <div className="flex justify-center mt-4">
+          <p>Please login to place an order.</p>
+          <button
+            className="ml-2 underline cursor-pointer text-blue-500"
+            onClick={() => navigate("/login")}
+          >
+            Go to login Page
+          </button>
+        </div>
+      )}
     </div>
   );
 }
