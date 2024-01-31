@@ -60,20 +60,22 @@ function OrderPage() {
 
   if (orderPlaced) {
     return (
-      <div className="text-center">
-        <h2 className="text-2xl font-bold my-4">
-          Thank you for your order: {orderId}
-        </h2>
-        <p className="mb-4">Your order has been placed successfully.</p>
-        <Link to="/" className="text-blue-500 hover:text-blue-700">
-          Return to Homepage
-        </Link>
+      <div className="page">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold my-4">
+            Thank you for your order: {orderId}
+          </h2>
+          <p className="mb-4">Your order has been placed successfully.</p>
+          <Link to="/" className="text-blue-500 hover:text-blue-700">
+            Return to Homepage
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="page">
+    <div className=" page ">
       {storedCart.map((item) => (
         <div
           key={item._id}

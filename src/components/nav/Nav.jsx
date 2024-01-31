@@ -33,9 +33,9 @@ function Nav() {
       if (searchValue) {
         performSearch();
       } else {
-        setSearchResults([]); // Clear results if search input is empty
+        setSearchResults([]); 
       }
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(delayDebounceFn);
   }, [searchValue]);
@@ -53,7 +53,7 @@ function Nav() {
 
   const handleProductClick = (productId) => {
     navigate(`/product/${productId}`);
-    setSearchResults([]); // Clear search results when product is clicked
+    setSearchResults([]); 
   };
 
   const handleIconClick = (event) => {
